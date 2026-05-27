@@ -6,6 +6,7 @@ Mindfullness app the incorporates meditation with the ability to advocate yourse
 - **Mindfulness Suite**: Custom meditation timer with soft fade-out and mantras.
 - **Vitals Tracker**: Log Oxygen, Heart Rate, Blood Pressure, and Glucose.
 - **AI Medical Report**: Subscription-based ($5/month) report generation.
+- **EHR Integration**: Import MyChart/Epic Master Files (CCDA XML) to auto-populate history.
 - **Smart Suggestions**: Non-diagnostic dietary and regulation tips (e.g., Vagus nerve stimulation).
 
 ## Tech Stack

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const VitalsTracker = () => {
+const VitalsTracker = ({ onLogVitals }) => {
   const [vitals, setVitals] = useState({ hr: '', bp: '', glucose: '', o2: '' });
   const [suggestion, setSuggestion] = useState('');
 
@@ -23,6 +23,17 @@ const VitalsTracker = () => {
     checkVitals(name, value);
   };
 
+  const handleLog = () => {
+    if (vitals.hr || vitals.bp || vitals.glucose || vitals.o2) {
+      onLogVitals({
+        ...vitals,
+        timestamp: new Date().toLocaleString()
+      });
+      setVitals({ hr: '', bp: '', glucose: '', o2: '' });
+      alert("Vitals logged to history.");
+    }
+  };
+
   return (
     <div style={{ background: 'white', padding: '20px', borderRadius: '20px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
       <h3 style={{ color: '#90CAF9' }}>Daily Vitals</h3>
@@ -33,6 +44,18 @@ const VitalsTracker = () => {
         <input name="glucose" placeholder="Glucose (mg/dL)" onChange={handleChange} style={inputStyle} />
       </div>
 
+      <button 
+        onClick={handleLog}
+        style={{ 
+          marginTop: '10px', 
+          width: '100%', 
+          padding: '10px', 
+          backgroundColor: '#90CAF9', 
+          color: 'white', 
+          border: 'none', 
+          borderRadius: '10px' 
+        }}>Log Today's Vitals</button>
+
       {suggestion && (
         <div style={{ marginTop: '15px', padding: '15px', backgroundColor: '#E3F2FD', borderRadius: '10px', borderLeft: '5px solid #81C784' }}>
           <strong>Tip:</strong> {suggestion}
@@ -42,10 +65,10 @@ const VitalsTracker = () => {
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
         <p style={{ fontSize: '0.8rem', color: '#999' }}>Unlock AI Medical Compiler for $5/mo</p>
         <a 
-          href="https://cash.app/$Christina-Smith-910" 
+          href="https://buy.stripe.com/3cI14o0yYghX9gmci11B600" 
           style={{ textDecoration: 'none', color: 'white', backgroundColor: '#81C784', padding: '10px 20px', borderRadius: '20px', display: 'inline-block' }}
         >
-          Subscribe via CashApp
+          Subscribe via Stripe
         </a>
       </div>
     </div>

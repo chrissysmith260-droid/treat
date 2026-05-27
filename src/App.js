@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
+s import React, { useState, useEffect, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
-import { Download, CreditCard, PieChart } from 'lucide-react';
+import { Download, CreditCard, Layout, Zap, Settings } from 'lucide-react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './theme.css';
@@ -11,7 +11,7 @@ import './style.css';
 // Initialize Stripe with a placeholder key (Replace with your actual publishable key)
 const stripePromise = loadStripe('pk_test_placeholder');
 
-const CheckoutForm = ({ apiBaseUrl }) => {
+const CheckoutForm = ({ apiBaseUrl, type = 'payment' }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [status, setStatus] = useState('idle');
@@ -21,7 +21,8 @@ const CheckoutForm = ({ apiBaseUrl }) => {
     if (!stripe || !elements) return;
 
     setStatus('processing');
-    const res = await fetch(`${apiBaseUrl}/api/create-payment-intent`, {
+    const endpoint = type === 'subscription' ? '/api/create-subscription' : '/api/create-payment-intent';
+    const res = await fetch(`${apiBaseUrl}${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ amount: 2000 }),
@@ -45,7 +46,8 @@ const CheckoutForm = ({ apiBaseUrl }) => {
     <form onSubmit={handleSubmit} className="payment-form">
       <CardElement className="card-input" />
       <button className="btn btn-primary" style={{ width: '100%' }} disabled={status === 'processing'}>
-        <CreditCard size={18} /> {status === 'processing' ? 'Processing...' : 'Checkout Now'}
+        <CreditCard size={18} /> 
+        {status === 'processing' ? 'Processing...' : type === 'subscription' ? 'Start Subscription' : 'Pay Now'}
       </button>
     </form>
   );
@@ -54,6 +56,7 @@ const CheckoutForm = ({ apiBaseUrl }) => {
 const App = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('dashboard');
 
   // Dynamically use the hosting IP for API calls
   const API_BASE_URL = useMemo(() => 
@@ -84,57 +87,74 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <header className="header">
-        <div>
-          <h1>Treat Dashboard</h1>
-          <p className="text-muted">Manage your rewards and payments</p>
+      <nav className="nav-menu">
+        <div className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+          <Layout size={20} /> Dashboard
         </div>
-        <div className="actions">
-          <button className="btn btn-primary" onClick={generatePDF}>
-            <Download size={18} /> Export PDF
-          </button>
+        <div className={`nav-item ${activeTab === 'payments' ? 'active' : ''}`} onClick={() => setActiveTab('payments')}>
+          <CreditCard size={20} /> Payments
         </div>
-      </header>
+        <div className={`nav-item ${activeTab === 'subscription' ? 'active' : ''}`} onClick={() => setActiveTab('subscription')}>
+          <Zap size={20} /> Subscription
+        </div>
+      </nav>
 
-      <div className="dashboard-grid">
-        <section className="card">
-          <h3>Revenue Overview</h3>
-          <div className="chart-container">
-            {!loading && (
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={data}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} />
-                  <YAxis axisLine={false} tickLine={false} />
-                  <Tooltip />
-                  <Line 
-                    type="monotone" 
-                    dataKey="sales" 
-                    stroke="#6366f1" 
-                    strokeWidth={3} 
-                    dot={{ r: 6 }} 
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            )}
-          </div>
-        </section>
+      {activeTab === 'dashboard' && (
+        <div className="view-content">
+          <header className="header">
+            <h1>Insights</h1>
+            <button className="btn" onClick={generatePDF}><Download size={18} /> Export PDF</button>
+          </header>
+          <section className="card">
+            <h3>Revenue Performance</h3>
+            <div className="chart-container">
+              {!loading && (
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={data}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.1)" />
+                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#fff'}} />
+                    <YAxis axisLine={false} tickLine={false} tick={{fill: '#fff'}} />
+                    <Tooltip contentStyle={{background: '#1e3a8a', border: '1px solid #fff'}} />
+                    <Line type="monotone" dataKey="sales" stroke="#fff" strokeWidth={3} dot={{ r: 6, fill: '#fff' }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              )}
+            </div>
+          </section>
+        </div>
+      )}
 
-        <section className="side-panel">
-          <div className="card stat-card">
-            <PieChart size={32} color="#6366f1" />
-            <div className="stat-value">$14,860</div>
-            <div className="text-muted">Total Sales</div>
-          </div>
-          <div className="card" style={{ marginTop: '1.5rem' }}>
-            <h3>Quick Payment</h3>
-            <p className="text-muted">Securely process new treat orders.</p>
+      {activeTab === 'payments' && (
+        <div className="view-content" style={{maxWidth: '600px', margin: '0 auto'}}>
+          <h1>Quick Payout</h1>
+          <p className="text-muted">Directly send funds to your connected account (Stripe/Chime).</p>
+          <section className="card">
             <Elements stripe={stripePromise}>
-              <CheckoutForm apiBaseUrl={API_BASE_URL} />
+              <CheckoutForm apiBaseUrl={API_BASE_URL} type="payment" />
             </Elements>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
+      )}
+
+      {activeTab === 'subscription' && (
+        <div className="view-content" style={{maxWidth: '600px', margin: '0 auto'}}>
+          <h1>Treat Premium</h1>
+          <p className="text-muted">Subscribe for advanced analytics and automated payouts.</p>
+          <section className="card">
+            <div style={{marginBottom: '1.5rem'}}>
+              <h2 style={{margin: 0}}>$29.99 / mo</h2>
+              <ul style={{paddingLeft: '1.2rem', marginTop: '0.5rem'}}>
+                <li>Unlimited exports</li>
+                <li>Real-time Stripe sync</li>
+                <li>Priority support</li>
+              </ul>
+            </div>
+            <Elements stripe={stripePromise}>
+              <CheckoutForm apiBaseUrl={API_BASE_URL} type="subscription" />
+            </Elements>
+          </section>
+        </div>
+      )}
     </div>
   );
 };

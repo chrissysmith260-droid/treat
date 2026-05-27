@@ -37,7 +37,7 @@ const VitalsTracker = ({ onLogVitals }) => {
 
   return (
     <div style={{ background: 'white', padding: '20px', borderRadius: '20px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
-      <h3 style={{ color: '#90CAF9' }}>Daily Vitals</h3>
+      <h3 style={{ color: theme.colors.accentBlue }}>Daily Vitals</h3>
       <div style={{ display: 'grid', gap: '10px' }}>
         <input name="o2" placeholder="Oxygen %" onChange={handleChange} style={inputStyle} />
         <input name="hr" placeholder="Heart Rate (BPM)" onChange={handleChange} style={inputStyle} />
@@ -51,14 +51,14 @@ const VitalsTracker = ({ onLogVitals }) => {
           marginTop: '10px', 
           width: '100%', 
           padding: '10px', 
-          backgroundColor: '#90CAF9', 
+          backgroundColor: theme.colors.accentBlue, 
           color: 'white', 
           border: 'none', 
           borderRadius: '10px' 
         }}>Log Today's Vitals</button>
 
       {suggestion && (
-        <div style={{ marginTop: '15px', padding: '15px', backgroundColor: '#E3F2FD', borderRadius: '10px', borderLeft: '5px solid #81C784' }}>
+        <div style={{ marginTop: '15px', padding: '15px', backgroundColor: theme.colors.primaryBlue, borderRadius: '10px', borderLeft: `5px solid ${theme.colors.leafGreen}` }}>
           <strong>Tip:</strong> {suggestion}
         </div>
       )}

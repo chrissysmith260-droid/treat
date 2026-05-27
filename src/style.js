@@ -3,12 +3,13 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   '*': {
     'boxSizing': 'border-box',
-    'transition': 'background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s'
+    'transition': 'all 0.2s ease-in-out'
   },
   'app-container': {
     'maxWidth': [{ 'unit': 'px', 'value': 1200 }],
     'margin': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'string', 'value': 'auto' }, { 'unit': 'px', 'value': 0 }, { 'unit': 'string', 'value': 'auto' }],
-    'padding': [{ 'unit': 'rem', 'value': 2 }, { 'unit': 'rem', 'value': 2 }, { 'unit': 'rem', 'value': 2 }, { 'unit': 'rem', 'value': 2 }]
+    'padding': [{ 'unit': 'rem', 'value': 2 }, { 'unit': 'rem', 'value': 2 }, { 'unit': 'rem', 'value': 2 }, { 'unit': 'rem', 'value': 2 }],
+    'minHeight': [{ 'unit': 'vh', 'value': 100 }]
   },
   'dashboard-grid': {
     'display': 'grid',
@@ -17,11 +18,11 @@ export default StyleSheet.create({
     'marginTop': [{ 'unit': 'rem', 'value': 2 }]
   },
   'card': {
-    'background': 'var(--surface)',
-    'border': [{ 'unit': 'px', 'value': 1 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': 'var(--border)' }],
+    'background': 'rgba(255, 255, 255, 0.05)',
+    'backdropFilter': 'blur(10px)',
+    'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': 'var(--border)' }],
     'borderRadius': 'var(--radius-md)',
-    'padding': [{ 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 1.5 }],
-    'boxShadow': [{ 'unit': 'string', 'value': 'var(--shadow-sm)' }, { 'unit': 'string', 'value': 'var(--shadow-sm)' }, { 'unit': 'string', 'value': 'var(--shadow-sm)' }, { 'unit': 'string', 'value': 'var(--shadow-sm)' }]
+    'padding': [{ 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 1.5 }]
   },
   'btn': {
     'display': 'flex',
@@ -33,21 +34,42 @@ export default StyleSheet.create({
     'borderRadius': 'var(--radius-sm)',
     'fontWeight': '600',
     'cursor': 'pointer',
-    'transition': 'all 0.2s',
-    'border': [{ 'unit': 'string', 'value': 'none' }]
+    'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': 'var(--border)' }],
+    'background': 'transparent',
+    'color': 'white'
   },
   'btn-primary': {
-    'background': 'linear-gradient(to bottom right, var(--primary), var(--primary-hover))',
-    'color': 'white',
-    'boxShadow': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 4 }, { 'unit': 'px', 'value': 14 }, { 'unit': 'px', 'value': 0 }, { 'unit': 'string', 'value': 'rgba(99, 102, 241, 0.39)' }]
+    'background': 'white',
+    'color': 'var(--background)'
   },
   'btn-primary:hover': {
-    'background': 'var(--primary-hover)',
-    'transform': 'translateY(-1px)',
-    'boxShadow': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'px', 'value': 6 }, { 'unit': 'px', 'value': 20 }, { 'unit': 'string', 'value': 'rgba(99, 102, 241, 0.23)' }]
+    'background': 'rgba(255, 255, 255, 0.9)',
+    'transform': 'scale(1.02)'
   },
-  'btn-primary:active': {
-    'transform': 'translateY(0)'
+  'nav-menu': {
+    'display': 'flex',
+    'gap': '2rem',
+    'marginBottom': [{ 'unit': 'rem', 'value': 3 }],
+    'borderBottom': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': 'rgba(255, 255, 255, 0.2)' }],
+    'paddingBottom': [{ 'unit': 'rem', 'value': 1 }]
+  },
+  'nav-item': {
+    'cursor': 'pointer',
+    'fontWeight': '500',
+    'opacity': '0.7',
+    'position': 'relative'
+  },
+  'nav-itemactive': {
+    'opacity': '1'
+  },
+  'nav-itemactive::after': {
+    'content': '''',
+    'position': 'absolute',
+    'bottom': [{ 'unit': 'rem', 'value': -1.2 }],
+    'left': [{ 'unit': 'px', 'value': 0 }],
+    'width': [{ 'unit': '%H', 'value': 1 }],
+    'height': [{ 'unit': 'px', 'value': 3 }],
+    'background': 'white'
   },
   'header': {
     'display': 'flex',
@@ -55,13 +77,9 @@ export default StyleSheet.create({
     'alignItems': 'center',
     'marginBottom': [{ 'unit': 'rem', 'value': 2 }]
   },
-  'stat-card': {
-    'textAlign': 'center'
-  },
   'stat-value': {
     'fontSize': [{ 'unit': 'rem', 'value': 2.5 }],
     'fontWeight': '700',
-    'color': 'var(--primary)',
     'letterSpacing': [{ 'unit': 'em', 'value': -0.025 }]
   },
   'payment-form': {

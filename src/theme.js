@@ -3,18 +3,21 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   ':root': {
     // Color Palette
-    'Primary': '#6366f1',
-    'PrimaryHover': '#4f46e5',
+    'Primary': '#ffffff',
+    'PrimaryHover': '#f1f5f9',
     'Secondary': '#ec4899',
-    'Background': '#f1f5f9',
-    'Surface': '#ffffff',
-    'TextMain': '#1e293b',
-    'TextMuted': '#64748b',
-    'Border': [{ 'unit': 'string', 'value': '#e2e8f0' }],
+    'Background': '#1e3a8a',
+    // Calming Deep Blue
+    'Surface': 'rgba(255, 255, 255, 0.1)',
+    // Transparent Glass Effect
+    'TextMain': '#ffffff',
+    'TextMuted': '#cbd5e1',
+    'Border': [{ 'unit': 'string', 'value': '#ffffff' }],
+    // White Outlines
     'Success': '#22c55e',
     'Error': '#ef4444',
     // Spacing & Borders
-    'RadiusSm': '6px',
+    'RadiusSm': '8px',
     'RadiusMd': '12px',
     'RadiusLg': '20px',
     'ShadowSm': '0 1px 3px rgba(0,0,0,0.1)',

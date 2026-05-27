@@ -70,14 +70,6 @@ const VitalsChart = ({ data }) => {
             />
             <Line 
               type="monotone" 
-              dataKey="HR" 
-              stroke={theme.colors.accentBlue} 
-              strokeWidth={2} 
-              dot={{ r: 4 }} 
-              activeDot={{ r: 6 }} 
-            />
-            <Line 
-              type="monotone" 
               dataKey="Glucose" 
               stroke={theme.colors.leafGreen} 
               strokeWidth={2} 

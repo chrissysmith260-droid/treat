@@ -1,4 +1,4 @@
-name: Build and deploy ASP.Net Core app to Azure Web App - treat
+name: Build and deploy Node.js app to Azure Web App - treat
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: treat
   AZURE_WEBAPP_PACKAGE_PATH: '.'
-  DOTNET_VERSION: '8.0.x'
+  NODE_VERSION: '20.x'
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 permissions:
@@ -24,31 +24,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: true
 
-      - name: Verify NPM Authentication
-        run: npm whoami
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
-
-      - name: Create Migration Bundle and Publish
-        run: |
-          dotnet tool install --global dotnet-ef
-          dotnet ef migrations bundle --runtime linux-x64 -o ${{env.DOTNET_ROOT}}/myapp/efbundle
-          dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      - name: Install dependencies and build
+        run: npm install && npm run build --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          name: node-app
+          path: .
 
   migrate:
     runs-on: ubuntu-latest
@@ -57,7 +46,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
+          name: node-app
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -66,29 +55,9 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Whitelist Runner IP
-        run: |
-          IP=$(curl -s https://api.ipify.org)
-          echo "RUNNER_IP=$IP" >> $GITHUB_ENV
-          az sql server firewall-rule create \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-            --server ${{ secrets.AZURE_SQL_SERVER_NAME }} \
-            --name GitHubActionsTempRule \
-            --start-ip-address $IP \
-            --end-ip-address $IP
-
-      - name: Run Migration Bundle
-        run: |
-          chmod +x ./efbundle
-          ./efbundle --connection "${{ secrets.SQL_CONNECTION_STRING }}"
-
-      - name: Remove Firewall Rule
-        if: always()
-        run: |
-          az sql server firewall-rule delete \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
-            --server ${{ secrets.AZURE_SQL_SERVER_NAME }} \
-            --name GitHubActionsTempRule
+      # Note: Database migrations for Node.js (e.g., Prisma/Sequelize) should be added here
+      - name: Placeholder for DB Migrations
+        run: echo "Running migrations..."
 
   deploy-staging:
     runs-on: ubuntu-latest
@@ -97,19 +66,10 @@ jobs:
       name: 'Staging'
       url: ${{ steps.deploy-to-staging.outputs.webapp-url }}
     steps:
-      - name: Checkout Source Code
-        uses: actions/checkout@v4
-
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-          cache: true
-
-      - name: Download artifact from build job
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
+          name: node-app
           path: ./publish
 
       - name: Login to Azure

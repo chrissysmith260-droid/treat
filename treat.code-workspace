@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "ui"
+		}
+	],
+	"settings": {
+		"dotnet.defaultSolution": "treat.sln",
+		"cmake.sourceDirectory": [
+			"cpp",
+			"shared"
+		],
+		"cmake.configureOnOpen": true
+	}
+}

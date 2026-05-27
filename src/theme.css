@@ -1,18 +1,18 @@
 :root {
   /* Color Palette */
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
+  --primary: #ffffff;
+  --primary-hover: #f1f5f9;
   --secondary: #ec4899;
-  --background: #f1f5f9;
-  --surface: #ffffff;
-  --text-main: #1e293b;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
+  --background: #1e3a8a; /* Calming Deep Blue */
+  --surface: rgba(255, 255, 255, 0.1); /* Transparent Glass Effect */
+  --text-main: #ffffff;
+  --text-muted: #cbd5e1;
+  --border: #ffffff; /* White Outlines */
   --success: #22c55e;
   --error: #ef4444;
 
   /* Spacing & Borders */
-  --radius-sm: 6px;
+  --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);

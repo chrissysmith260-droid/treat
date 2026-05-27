@@ -326,7 +326,8 @@ This report is intended to facilitate clinical discussion with a healthcare prov
 
     (async () => {
       try {
-        const response = await fetch('/api/ai/generate-report', {
+        const apiHost = import.meta.env.VITE_API_BASE_URL || '';
+        const response = await fetch(`${apiHost}/api/ai/generate-report`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

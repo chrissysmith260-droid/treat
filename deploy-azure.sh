@@ -58,12 +58,14 @@ az role assignment create --role "Monitoring Metrics Publisher" --assignee $prin
 # Update app settings to use managed identities for all connections
 clientId=$(az identity show --name $userIdentity --resource-group $resourceGroup \
     --query 'clientId' -o tsv)
-az functionapp config appsettings set --name $functionApp --resource-group $resourceGroup \
-    --settings AzureWebJobsStorage__accountName=$storage AzureWebJobsStorage__credential=managedidentity \
-    AzureWebJobsStorage__clientId=$clientId \
-    APPLICATIONINSIGHTS_AUTHENTICATION_STRING="ClientId=$clientId;Authorization=AAD"
-az functionapp config appsettings delete --name $functionApp \
-    --resource-group $resourceGroup --setting-names AzureWebJobsStorage
+
+echo "Configuring App Settings for Managed Identity..."
+az functionapp config appsettings set --name $functionApp --resource-group $resourceGroup --settings \
+    AzureWebJobsStorage__accountName="$storage" \
+    AzureWebJobsStorage__credential="managedidentity" \
+    AzureWebJobsStorage__clientId="$clientId" \
+    APPLICATIONINSIGHTS_AUTHENTICATION_STRING="ClientId=$clientId;Authorization=AAD" \
+    FUNCTIONS_EXTENSION_VERSION="~4"
 
 # echo "Deleting all resources"
 # az group delete --name $resourceGroup -y

@@ -1,18 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "yTHhusjW2x0=",
+  "dgSpecHash": "GEyIeDAROfs=",
   "success": true,
   "projectFilePath": "/workspaces/treat/treat.csproj",
   "expectedPackageFiles": [
-    "/home/codespace/.nuget/packages/microsoft.aspnetcore.spaproxy/8.0.27/microsoft.aspnetcore.spaproxy.8.0.27.nupkg.sha512",
-    "/home/codespace/.nuget/packages/microsoft.aspnetcore.spaservices.extensions/8.0.27/microsoft.aspnetcore.spaservices.extensions.8.0.27.nupkg.sha512",
-    "/home/codespace/.nuget/packages/microsoft.extensions.fileproviders.abstractions/8.0.0/microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
-    "/home/codespace/.nuget/packages/microsoft.extensions.fileproviders.physical/8.0.0/microsoft.extensions.fileproviders.physical.8.0.0.nupkg.sha512",
-    "/home/codespace/.nuget/packages/microsoft.extensions.filesystemglobbing/8.0.0/microsoft.extensions.filesystemglobbing.8.0.0.nupkg.sha512",
-    "/home/codespace/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "/home/codespace/.nuget/packages/microsoft.netcore.app.ref/8.0.25/microsoft.netcore.app.ref.8.0.25.nupkg.sha512",
-    "/home/codespace/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.25/microsoft.aspnetcore.app.ref.8.0.25.nupkg.sha512",
-    "/home/codespace/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.25/microsoft.netcore.app.host.linux-x64.8.0.25.nupkg.sha512"
+    "/home/codespace/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.25/microsoft.aspnetcore.app.ref.8.0.25.nupkg.sha512"
   ],
   "logs": []
 }

@@ -4,6 +4,9 @@
     <!-- Other properties like TargetFramework -->
     <TargetFramework>net8.0</TargetFramework>
 
+    <!-- Versioning for NuGet packages -->
+    <Version>1.0.1</Version>
+
     <!-- 1. Redirect NuGet package output to your specific folder -->
     <PackageOutputPath>bin/Release</PackageOutputPath>
 
@@ -12,6 +15,9 @@
     
     <!-- 3. Optional: Ensures the folder structure is clean -->
     <IsPackable>true</IsPackable>
+
+    <!-- Prevent root project from compiling sub-projects or stale obj files -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);Tests\**;treat\**;bin\**;obj\**</DefaultItemExcludes>
   </PropertyGroup>
 
 </Project>

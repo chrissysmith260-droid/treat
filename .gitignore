@@ -1,2 +1,10 @@
 # NuGet package build output
 /workspaces/treat/bin/Release
+
+# .NET Build folders
+obj/
+bin/
+
+# Build artifacts
+dist/
+*.tar.gz

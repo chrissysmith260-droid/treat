@@ -1,16 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import { Download, CreditCard, PieChart } from 'lucide-react';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './theme.css';
 import './style.css';
+
+// Initialize Stripe with a placeholder key (Replace with your actual publishable key)
+const stripePromise = loadStripe('pk_test_placeholder');
+
+const CheckoutForm = ({ apiBaseUrl }) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [status, setStatus] = useState('idle');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!stripe || !elements) return;
+
+    setStatus('processing');
+    const res = await fetch(`${apiBaseUrl}/api/create-payment-intent`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: 2000 }),
+    });
+    const { clientSecret } = await res.json();
+
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: { card: elements.getElement(CardElement) }
+    });
+
+    if (result.error) {
+      alert(result.error.message);
+      setStatus('error');
+    } else {
+      alert('Treat Order Successful!');
+      setStatus('success');
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="payment-form">
+      <CardElement className="card-input" />
+      <button className="btn btn-primary" style={{ width: '100%' }} disabled={status === 'processing'}>
+        <CreditCard size={18} /> {status === 'processing' ? 'Processing...' : 'Checkout Now'}
+      </button>
+    </form>
+  );
+};
 
 const App = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+  // Dynamically use the hosting IP for API calls
+  const API_BASE_URL = useMemo(() => 
+    process.env.REACT_APP_API_URL || `http://${window.location.hostname}:5000`, 
+  []);
 
   useEffect(() => {
     // Fetch analytics from backend
@@ -81,9 +129,9 @@ const App = () => {
           <div className="card" style={{ marginTop: '1.5rem' }}>
             <h3>Quick Payment</h3>
             <p className="text-muted">Securely process new treat orders.</p>
-            <button className="btn btn-primary" style={{ width: '100%' }}>
-              <CreditCard size={18} /> Checkout Now
-            </button>
+            <Elements stripe={stripePromise}>
+              <CheckoutForm apiBaseUrl={API_BASE_URL} />
+            </Elements>
           </div>
         </section>
       </div>

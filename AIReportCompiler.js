@@ -4,6 +4,8 @@ import { Download, FileText, Sparkles, Share } from 'lucide-react';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
+const GOOGLE_API_KEY = "AIzaSyD_BE4Kji1rYFmWF0a5kt59_BuPrj9TJdQ";
+
 const AIReportCompiler = ({ symptoms, vitalsHistory, labs, appointments, medications, allergies, isSubscribed, setIsSubscribed }) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [report, setReport] = useState('');
@@ -186,7 +188,6 @@ const AIReportCompiler = ({ symptoms, vitalsHistory, labs, appointments, medicat
 
                 autoTable(doc, {
                   startY: cursorY,
-                  head: [['Substance', 'Reaction']],
                   head: [['Substance', 'Reaction', 'Severity']],
                   body: allergies.map(a => [a.substance, a.reaction, a.severity || 'Moderate']),
                   theme: 'striped',
@@ -263,7 +264,7 @@ const AIReportCompiler = ({ symptoms, vitalsHistory, labs, appointments, medicat
 
   const generateReport = () => {
     setIsGenerating(true);
-    // Simulating AI processing delay
+    // TODO: Integrate Google Generative AI using GOOGLE_API_KEY for real report generation
     setTimeout(() => {
       const symptomSummary = symptoms.map(s => `- ${s.name} (Mood: ${s.mood || 'Neutral'}, Severity: ${s.severity || 'Moderate'}, Type: ${s.type}) on ${s.date}: ${s.notes}`).join('\n');
       const vitalsSummary = vitalsHistory.map(v => `- ${v.timestamp}: BP ${v.bp}, HR ${v.hr}, Glucose ${v.glucose}, O2 ${v.o2}%`).join('\n');

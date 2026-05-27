@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.7.1",
+    "@stripe/stripe-js": "^3.4.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
+    "lucide-react": "^0.284.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "lucide-react": "^0.284.0",
-    "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.8.2",
-    "recharts": "^2.12.7",
-    "@stripe/react-stripe-js": "^2.7.1",
-    "@stripe/stripe-js": "^3.4.0"
+    "react-scripts": "^0.0.0",
+    "recharts": "^2.12.7"
   },
   "scripts": {
     "start": "react-scripts start",

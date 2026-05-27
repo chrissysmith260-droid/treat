@@ -10,10 +10,12 @@ env:
   AZURE_WEBAPP_NAME: treat
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   DOTNET_VERSION: '8.0.x'
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 permissions:
   id-token: write
   contents: read
+  checks: write
 
 jobs:
   build:
@@ -27,6 +29,11 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
           cache: true
+
+      - name: Verify NPM Authentication
+        run: npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
@@ -103,7 +110,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-          path: .
+          path: ./publish
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -118,7 +125,7 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'staging'
-          package: .
+          package: ./publish
 
       - name: Run Integration Tests
         run: |

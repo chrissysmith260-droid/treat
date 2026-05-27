@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import { theme } from './theme';
+import { theme } from './src/theme';
 
 // Replace with your actual Stripe publishable key
 const stripePromise = loadStripe('pk_test_YOUR_STRIPE_PUBLISHABLE_KEY'); 

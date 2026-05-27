@@ -1,5 +1,5 @@
 import React from 'react';
-import { theme } from './theme';
+import { theme } from './src/theme';
 import { CheckCircle, ArrowLeft } from 'lucide-react';
 
 const SuccessPage = () => {

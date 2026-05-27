@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComposedChart, Line, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { theme } from './theme';
+import { theme } from './src/theme';
 
 const VitalsChart = ({ data }) => {
   // Process data for the last 7 days and convert to numerical values

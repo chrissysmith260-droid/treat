@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { theme } from './theme';
+import { theme } from './src/theme';
 import { Edit2, Trash2, Check, X, Plus } from 'lucide-react';
 
 const MedicationsTable = ({ medications, setMedications }) => {

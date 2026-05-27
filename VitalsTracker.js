@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { theme } from './src/theme';
 
 const VitalsTracker = ({ onLogVitals }) => {
   const [vitals, setVitals] = useState({ hr: '', bp: '', glucose: '', o2: '' });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { theme } from './theme';
+import { theme } from './src/theme';
 
 const LabsTable = ({ labs }) => {
   if (!labs || labs.length === 0) return null;

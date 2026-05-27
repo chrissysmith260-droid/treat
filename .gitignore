@@ -1,17 +1,2 @@
-
-bin/
-obj/
-.vs/
-.vscode/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-
-build/
-out/
-
-treat_cpp
-cpp/build/
-node_modules/
-node_modules
+# NuGet package build output
+/workspaces/treat/bin/Release

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/treat_cpp.dir/main.cpp.o -o /workspaces/treat/treat_cpp  -Wl,-rpath,/workspaces/treat/cpp/../shared/build /workspaces/treat/cpp/../shared/build/libshared.so 

@@ -1,0 +1,3 @@
+/workspaces/treat/shared/build/CMakeFiles/shared.dir
+/workspaces/treat/shared/build/CMakeFiles/edit_cache.dir
+/workspaces/treat/shared/build/CMakeFiles/rebuild_cache.dir

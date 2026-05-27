@@ -1,101 +1,94 @@
-import { StyleSheet } from 'react-native';
-
-export default StyleSheet.create({
-  '*': {
-    'boxSizing': 'border-box',
-    'transition': 'all 0.2s ease-in-out'
+export const styles = {
+  appContainer: {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '1.5rem 2rem',
+    minHeight: '100vh',
+    background: '#EBF5FF'
   },
-  'app-container': {
-    'maxWidth': [{ 'unit': 'px', 'value': 1200 }],
-    'margin': [{ 'unit': 'px', 'value': 0 }, { 'unit': 'string', 'value': 'auto' }, { 'unit': 'px', 'value': 0 }, { 'unit': 'string', 'value': 'auto' }],
-    'padding': [{ 'unit': 'rem', 'value': 2 }, { 'unit': 'rem', 'value': 2 }, { 'unit': 'rem', 'value': 2 }, { 'unit': 'rem', 'value': 2 }],
-    'minHeight': [{ 'unit': 'vh', 'value': 100 }]
+  dashboardGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+    gap: '2rem',
+    marginTop: '1rem'
   },
-  'dashboard-grid': {
-    'display': 'grid',
-    'gridTemplateColumns': '2fr 1fr',
-    'gap': '1.5rem',
-    'marginTop': [{ 'unit': 'rem', 'value': 2 }]
+  card: {
+    background: '#CCE5FF',
+    border: '1px solid #E3E8ED',
+    borderRadius: '24px',
+    padding: '2rem',
+    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease'
   },
-  'card': {
-    'background': 'rgba(255, 255, 255, 0.05)',
-    'backdropFilter': 'blur(10px)',
-    'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': 'var(--border)' }],
-    'borderRadius': 'var(--radius-md)',
-    'padding': [{ 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 1.5 }]
+  btn: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.5rem',
+    padding: '0.75rem 1.5rem',
+    fontSize: '0.95rem',
+    borderRadius: '16px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    border: '1px solid #E3E8ED',
+    background: 'transparent',
+    color: '#1A1C1E',
+    transition: 'all 0.2s ease'
   },
-  'btn': {
-    'display': 'flex',
-    'alignItems': 'center',
-    'justifyContent': 'center',
-    'gap': '0.5rem',
-    'padding': [{ 'unit': 'rem', 'value': 0.75 }, { 'unit': 'rem', 'value': 1.5 }, { 'unit': 'rem', 'value': 0.75 }, { 'unit': 'rem', 'value': 1.5 }],
-    'fontSize': [{ 'unit': 'rem', 'value': 0.95 }],
-    'borderRadius': 'var(--radius-sm)',
-    'fontWeight': '600',
-    'cursor': 'pointer',
-    'border': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': 'var(--border)' }],
-    'background': 'transparent',
-    'color': 'white'
+  btnPrimary: {
+    background: '#1A1C1E',
+    color: '#FFFFFF',
+    textShadow: '1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000',
+    border: 'none'
   },
-  'btn-primary': {
-    'background': 'white',
-    'color': 'var(--background)'
+  btnSecondary: {
+    background: '#F1F3F5',
+    color: '#495057',
+    border: 'none'
   },
-  'btn-primary:hover': {
-    'background': 'rgba(255, 255, 255, 0.9)',
-    'transform': 'scale(1.02)'
+  navMenu: {
+    display: 'flex',
+    gap: '1.5rem',
+    marginBottom: '3rem',
+    borderBottom: '1px solid #E3E8ED',
+    paddingBottom: '1rem'
   },
-  'nav-menu': {
-    'display': 'flex',
-    'gap': '2rem',
-    'marginBottom': [{ 'unit': 'rem', 'value': 3 }],
-    'borderBottom': [{ 'unit': 'px', 'value': 2 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': 'rgba(255, 255, 255, 0.2)' }],
-    'paddingBottom': [{ 'unit': 'rem', 'value': 1 }]
+  navItem: {
+    cursor: 'pointer',
+    fontWeight: '500',
+    opacity: '0.7',
+    position: 'relative',
+    padding: '0.5rem 1rem',
+    borderRadius: '12px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px'
   },
-  'nav-item': {
-    'cursor': 'pointer',
-    'fontWeight': '500',
-    'opacity': '0.7',
-    'position': 'relative'
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '2rem'
   },
-  'nav-itemactive': {
-    'opacity': '1'
+  statValue: {
+    fontSize: '2.5rem',
+    fontWeight: '700',
+    letterSpacing: '-0.025em'
   },
-  'nav-itemactive::after': {
-    'content': '''',
-    'position': 'absolute',
-    'bottom': [{ 'unit': 'rem', 'value': -1.2 }],
-    'left': [{ 'unit': 'px', 'value': 0 }],
-    'width': [{ 'unit': '%H', 'value': 1 }],
-    'height': [{ 'unit': 'px', 'value': 3 }],
-    'background': 'white'
+  paymentForm: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    marginTop: '1rem'
   },
-  'header': {
-    'display': 'flex',
-    'justifyContent': 'space-between',
-    'alignItems': 'center',
-    'marginBottom': [{ 'unit': 'rem', 'value': 2 }]
+  cardInput: {
+    padding: '0.75rem',
+    border: '1px solid var(--border)',
+    borderRadius: 'var(--radius-sm)'
   },
-  'stat-value': {
-    'fontSize': [{ 'unit': 'rem', 'value': 2.5 }],
-    'fontWeight': '700',
-    'letterSpacing': [{ 'unit': 'em', 'value': -0.025 }]
-  },
-  'payment-form': {
-    'display': 'flex',
-    'flexDirection': 'column',
-    'gap': '1rem',
-    'marginTop': [{ 'unit': 'rem', 'value': 1 }]
-  },
-  'card-input': {
-    'padding': [{ 'unit': 'rem', 'value': 0.75 }, { 'unit': 'rem', 'value': 0.75 }, { 'unit': 'rem', 'value': 0.75 }, { 'unit': 'rem', 'value': 0.75 }],
-    'border': [{ 'unit': 'px', 'value': 1 }, { 'unit': 'string', 'value': 'solid' }, { 'unit': 'string', 'value': 'var(--border)' }],
-    'borderRadius': 'var(--radius-sm)'
-  },
-  'chart-container': {
-    'height': [{ 'unit': 'px', 'value': 300 }],
-    'width': [{ 'unit': '%H', 'value': 1 }],
-    'marginTop': [{ 'unit': 'rem', 'value': 1 }]
+  chartContainer: {
+    height: '300px',
+    width: '100%',
+    marginTop: '1rem'
   }
-});
+};

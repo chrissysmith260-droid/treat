@@ -1,0 +1,15 @@
+/workspaces/treat/treat/obj/Release/net8.0/treat.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/treat/treat/obj/Release/net8.0/treat.AssemblyInfoInputs.cache
+/workspaces/treat/treat/obj/Release/net8.0/treat.AssemblyInfo.cs
+/workspaces/treat/treat/obj/Release/net8.0/treat.csproj.CoreCompileInputs.cache
+/workspaces/treat/treat/obj/Release/net8.0/treat.sourcelink.json
+/workspaces/treat/treat/bin/Release/net8.0/treat
+/workspaces/treat/treat/bin/Release/net8.0/treat.deps.json
+/workspaces/treat/treat/bin/Release/net8.0/treat.runtimeconfig.json
+/workspaces/treat/treat/bin/Release/net8.0/treat.dll
+/workspaces/treat/treat/bin/Release/net8.0/treat.pdb
+/workspaces/treat/treat/obj/Release/net8.0/treat.dll
+/workspaces/treat/treat/obj/Release/net8.0/refint/treat.dll
+/workspaces/treat/treat/obj/Release/net8.0/treat.pdb
+/workspaces/treat/treat/obj/Release/net8.0/treat.genruntimeconfig.cache
+/workspaces/treat/treat/obj/Release/net8.0/ref/treat.dll

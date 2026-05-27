@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Other properties like TargetFramework -->
+    <TargetFramework>net8.0</TargetFramework>
+
+    <!-- 1. Redirect NuGet package output to your specific folder -->
+    <PackageOutputPath>bin/Release</PackageOutputPath>
+
+    <!-- 2. Automatically generate the .nupkg file during build -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    
+    <!-- 3. Optional: Ensures the folder structure is clean -->
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+</Project>
